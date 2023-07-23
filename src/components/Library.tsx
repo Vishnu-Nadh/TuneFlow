@@ -3,10 +3,30 @@
 import React from "react";
 import { TbPlaylist } from "react-icons/tb";
 import { AiOutlinePlus } from "react-icons/ai";
+import useAuthModal from "@/hooks/useAuthModal";
+import { useUser } from "@/hooks/useUser";
+import useUploadModal from "@/hooks/useUploadModal";
+import { Song } from "../../types";
+import MediaItem from "./MediaItem";
 
-const Library = () => {
+interface LibraryProps {
+  songs: Song[];
+}
+
+const Library: React.FC<LibraryProps> = ({ songs }) => {
+  const authModal = useAuthModal();
+  const { user } = useUser();
+  const uploadModal = useUploadModal();
+
   function addMusic() {
     // upload music file
+    if (!user) {
+      return authModal.onOpen();
+    }
+
+    // TODO : check for subscriptions
+
+    uploadModal.onOpen();
   }
 
   return (
@@ -22,7 +42,11 @@ const Library = () => {
           onClick={addMusic}
         />
       </div>
-      <div className="flex flex-col gap-y-2 px-4 py-2">List of songs!</div>
+      <div className="flex flex-col gap-y-2 px-4 py-2">
+        {songs.map((song) => (
+          <MediaItem onClick={() => {}} key={song.id} data={song} />
+        ))}
+      </div>
     </div>
   );
 };

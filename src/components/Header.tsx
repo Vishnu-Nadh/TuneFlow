@@ -7,6 +7,11 @@ import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
 import Button from "./Button";
+import useAuthModal from "@/hooks/useAuthModal";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useUser } from "@/hooks/useUser";
+import { FaUserAlt } from "react-icons/fa";
+import { toast } from "react-hot-toast";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -15,12 +20,27 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ children, className }) => {
   const router = useRouter();
-  function handleLogout() {
+  const authModal = useAuthModal();
+  const supabaseClient = useSupabaseClient();
+  const { user } = useUser();
+
+  async function handleLogout() {
     // logout user
+    const { error } = await supabaseClient.auth.signOut();
+    // TODO: Reset all playing songs
+
+    router.refresh();
+
+    if (error) {
+      // console.error(error);
+      toast.error(error.message);
+    } else {
+      toast.success("Logged out");
+    }
   }
 
   return (
-    <div className={twMerge("h-fit bg-gradient-to-b from-rose-900 p-6", className)}>
+    <div className={twMerge("h-20 w-full p-6 rounded-t-md bg-gradient-to-b from-rose-900", className)}>
       <div className="w-full mb-4 flex items-center justify-between">
         <div className="md:flex gap-2 hidden">
           <button
@@ -45,14 +65,36 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           </button>
         </div>
         <div className="flex justify-between items-center gap-x-4">
-          <>
-            <div>
-              <Button className="bg-transparant text-white">Sign Up</Button>
-            </div>
-            <div>
-              <Button className="bg-white bg-opacity-90 text-black hover:bg-opacity-100">Login</Button>
-            </div>
-          </>
+          {user ? (
+            <>
+              <div>
+                <Button className="bg-white" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </div>
+              <Button
+                className="bg-white p-2 rounded-full"
+                onClick={() => {
+                  router.push("/account");
+                }}
+              >
+                <FaUserAlt />
+              </Button>
+            </>
+          ) : (
+            <>
+              <div>
+                <Button className="bg-transparant text-white" onClick={authModal.onOpen}>
+                  Sign Up
+                </Button>
+              </div>
+              <div>
+                <Button className="bg-white bg-opacity-90 text-black hover:bg-opacity-100" onClick={authModal.onOpen}>
+                  Login
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       </div>
       {children}

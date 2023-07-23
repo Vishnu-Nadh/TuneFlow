@@ -10,6 +10,7 @@ body,
   color: #fffbfd;
   min-height: 100vh;
   background-color: hsla(330, 13%, 8%, 1);
+  overflow-y: auto !important;
 }
 
 body {
