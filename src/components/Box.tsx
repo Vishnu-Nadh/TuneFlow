@@ -14,7 +14,9 @@ const Box: React.FC<BoxProps> = ({ children, className }) => {
            bg-opacity-10
            rounded-lg
            h-fit
-           w-full`,
+           w-full
+           scrollContainer
+           `,
         className
       )}
     >
