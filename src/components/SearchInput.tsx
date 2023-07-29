@@ -26,7 +26,7 @@ const SearchInput = () => {
 
   return (
     <Input
-      className="bg-neutral-900/40"
+      className="bg-neutral-900/50"
       placeholder="What do you want to listen?"
       onChange={(e) => setInputValue(e.target.value)}
       value={inputValue}

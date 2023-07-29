@@ -8,6 +8,7 @@ export const revalidate = 0;
 
 export default async function Home() {
   const songs = await getSongs();
+
   return (
     <Box className="h-full bg-opacity-5 overflow-hidden overflow-y-auto relative">
       <Header className="sticky top-0 left-0 max-h-20 z-10">{}</Header>

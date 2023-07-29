@@ -33,7 +33,7 @@ const Library: React.FC<LibraryProps> = ({ songs }) => {
   }
 
   return (
-    <div>
+    <div className="">
       <div className="flex px-4 gap-y-2 mt-4 items-center w-full justify-between">
         <div className="flex gap-2 cursor-pointer">
           <TbPlaylist size={26} className="text-neutral-300" />
