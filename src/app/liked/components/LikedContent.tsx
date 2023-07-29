@@ -22,6 +22,8 @@ const LikedContent: React.FC<LikedContentProps> = ({ songs }) => {
     if (!isLoading && !user) {
       router.replace("/");
     }
+
+    
   }, [isLoading, user, router]);
 
   if (songs.length === 0) {
