@@ -14,7 +14,6 @@ const ListItem: React.FC<ListItemProps> = ({ image, name, href }) => {
   const router = useRouter();
   function goToSong() {
     // authetication
-
     router.push(href);
   }
   return (
