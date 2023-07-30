@@ -16,7 +16,7 @@ const Liked = async () => {
         <div className="mt-10">
           <div className="flex flex-col md:flex-row items-center gap-x-5">
             <div className="relative h-24 w-24 lg:h-32 lg:w-32">
-              <Image src="/Images/liked.png" alt="playlist" fill className="object-cover" />
+              <Image src={"/Images/liked.png"} alt="playlist" fill className="object-cover" />
             </div>
             <div className="flex flex-col gap-y-2 mt-4 md:mt-0">
               <p className="hidden md:block font-semibold text-sm">Playlist</p>
