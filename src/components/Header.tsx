@@ -26,6 +26,8 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
   const { user } = useUser();
   const player = usePlayer();
 
+  console.log(user?.email);
+
   async function handleLogout() {
     // logout user
     const { error } = await supabaseClient.auth.signOut();
@@ -66,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             <BiSearch size={24} />
           </button>
         </div>
-        <div className="flex justify-between items-center gap-x-4">
+        <div className="flex justify-between items-center gap-x-4 relative">
           {user ? (
             <>
               <div>
@@ -75,13 +77,16 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                 </Button>
               </div>
               <Button
-                className="bg-white p-2 rounded-full"
+                className="bg-white p-2 rounded-full peer"
                 onClick={() => {
-                  router.push("/account");
+                  // router.push("/account");
                 }}
               >
                 <FaUserAlt />
               </Button>
+              <div className="absolute invisible peer-hover:visible transition right-0 top-10 p-3 bg-neutral-400/25 rounded-lg">
+                {user.email}
+              </div>
             </>
           ) : (
             <>
