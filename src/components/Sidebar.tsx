@@ -9,7 +9,7 @@ import SidebarItem from "./SidebarItem";
 import Library from "./Library";
 import { Song } from "../../types";
 import { twMerge } from "tailwind-merge";
-import usePlayer from "@/actions/usePlayer";
+import usePlayer from "@/hooks/usePlayer";
 
 interface SidebarProps {
   children: React.ReactNode;

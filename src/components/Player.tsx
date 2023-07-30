@@ -1,6 +1,6 @@
 "use client";
 
-import usePlayer from "@/actions/usePlayer";
+import usePlayer from "@/hooks/usePlayer";
 import useGetSongById from "@/hooks/useGetSongById";
 import useLoadSongUrl from "@/hooks/useLoadSongUrl";
 import React from "react";

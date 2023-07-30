@@ -1,5 +1,5 @@
-import * as Dialog from '@radix-ui/react-dialog';
-import { IoMdClose } from 'react-icons/io';
+import * as Dialog from "@radix-ui/react-dialog";
+import { IoMdClose } from "react-icons/io";
 
 interface ModalProps {
   isOpen: boolean;
@@ -9,23 +9,18 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({
-  isOpen,
-  onChange,
-  title,
-  description,
-  children
-}) => {
-  return ( 
+const Modal: React.FC<ModalProps> = ({ isOpen, onChange, title, description, children }) => {
+  return (
     <Dialog.Root open={isOpen} defaultOpen={isOpen} onOpenChange={onChange}>
       <Dialog.Portal>
-        <Dialog.Overlay 
+        <Dialog.Overlay
           className="
             bg-neutral-900/90 
             backdrop-blur-sm 
             fixed 
             inset-0
-          " 
+            z-20
+          "
         />
         <Dialog.Content
           className="
@@ -48,8 +43,10 @@ const Modal: React.FC<ModalProps> = ({
             bg-neutral-800 
             p-[25px] 
             focus:outline-none
-          ">
-          <Dialog.Title 
+            z-30
+          "
+        >
+          <Dialog.Title
             className="
               text-xl 
               text-center 
@@ -59,7 +56,7 @@ const Modal: React.FC<ModalProps> = ({
           >
             {title}
           </Dialog.Title>
-          <Dialog.Description 
+          <Dialog.Description
             className="
               mb-5 
               text-sm 
@@ -69,9 +66,7 @@ const Modal: React.FC<ModalProps> = ({
           >
             {description}
           </Dialog.Description>
-          <div>
-            {children}
-          </div>
+          <div>{children}</div>
           <Dialog.Close asChild>
             <button
               className="
@@ -98,6 +93,6 @@ const Modal: React.FC<ModalProps> = ({
       </Dialog.Portal>
     </Dialog.Root>
   );
-}
- 
+};
+
 export default Modal;
